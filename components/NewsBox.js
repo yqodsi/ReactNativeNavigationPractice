@@ -5,16 +5,15 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity
+  Linking,
+  TouchableOpacity,
+  FlatList
 } from "react-native";
 
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
-const NewsBox = ({ navigation }) => {
+const NewsBox = (props) => {
   return (
     <View style={styles.container}>
-      <Image style={styles.img} source={require("./azo.jpg")} />
+      <Image style={styles.img} source={props.img_url} />
       <View style={styles.text}>
         <Text
           numberOfLines={3}
@@ -26,8 +25,7 @@ const NewsBox = ({ navigation }) => {
             paddingBottom: 3
           }}
         >
-          Graham Potter questions Premier League's coronavirus postponement
-          stance
+          {props.article}
         </Text>
         <View style={styles.sourceText}>
           <Text
@@ -37,13 +35,15 @@ const NewsBox = ({ navigation }) => {
               paddingLeft: 10
             }}
           >
-            www.skysport.com
+            {props.source}
           </Text>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate("Home")}
+            onPress={() => Linking.openURL(props.url)}
           >
-            <Text style={{ fontFamily: "ubuntu" }}>Read more</Text>
+            <Text style={{ fontFamily: "ubuntu", color: "white" }}>
+              Read Article
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -53,7 +53,7 @@ const NewsBox = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#F5F5F5",
+    backgroundColor: "white",
     padding: 10,
     margin: 10,
     flexDirection: "row",
@@ -82,11 +82,11 @@ const styles = StyleSheet.create({
     // paddingVertical: 20
   },
   button: {
-    backgroundColor: "gold",
+    backgroundColor: "#2FDD92",
     padding: 3,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 10
+    borderRadius: 3
   }
 });
 export default NewsBox;

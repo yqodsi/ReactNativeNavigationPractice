@@ -1,9 +1,8 @@
 import React from "react";
 import { Button, Image, StyleSheet, Text, View } from "react-native";
-import { useFonts } from "expo-font";
-import { NavigationContainer, StackActions } from "@react-navigation/native";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import NewsBox from "../components/NewsBox.js";
+import ListRenderer from "../components/ListRenderer";
 
 function HomeScreen({ navigation }) {
   return (
@@ -11,19 +10,25 @@ function HomeScreen({ navigation }) {
       <Text>Home Screen</Text>
       <Button
         title="Go to Details"
-        onPress={() => navigation.navigate("NewsBox")}
+        onPress={() => navigation.navigate("List")}
       />
     </View>
   );
 }
+const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: "#F5F5F5"
+  }
+};
 const Stack = createNativeStackNavigator();
 function App() {
-  let [fontLoaded, error] = useFonts({});
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={MyTheme}>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="NewsBox" component={NewsBox} />
+        <Stack.Screen name="List" component={ListRenderer} />
       </Stack.Navigator>
     </NavigationContainer>
   );
