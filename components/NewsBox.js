@@ -8,7 +8,10 @@ import {
   TouchableOpacity
 } from "react-native";
 
-const NewsBox = () => {
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+const NewsBox = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Image style={styles.img} source={require("./azo.jpg")} />
@@ -20,7 +23,7 @@ const NewsBox = () => {
             fontSize: 15,
             fontFamily: "ubuntu",
             paddingHorizontal: 10,
-            paddingBottom: 7
+            paddingBottom: 3
           }}
         >
           Graham Potter questions Premier League's coronavirus postponement
@@ -38,7 +41,7 @@ const NewsBox = () => {
           </Text>
           <TouchableOpacity
             style={styles.button}
-            onPress={console.log("fuk u")}
+            onPress={() => navigation.navigate("Home")}
           >
             <Text style={{ fontFamily: "ubuntu" }}>Read more</Text>
           </TouchableOpacity>
@@ -53,12 +56,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#F5F5F5",
     padding: 10,
     margin: 10,
-    flex: 1,
     flexDirection: "row",
     // borderWidth: 1,
     // borderColor: "black",
-    borderRadius: 10,
-    elevation: 3
+    borderRadius: 10
   },
   img: {
     width: 80,
@@ -82,11 +83,9 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: "gold",
-    // padding: 1,
+    padding: 3,
     justifyContent: "center",
     alignItems: "center",
-    width: 90,
-    height: 20,
     borderRadius: 10
   }
 });
